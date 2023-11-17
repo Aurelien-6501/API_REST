@@ -14,7 +14,7 @@ const route = useRoute();
 const router = useRouter();
 
 async function updateOrCreatePlate() {
-  if (plate._id) {
+  if (plate.value._id) {
     await ApiService.updatePlate(route.params.plate_id, plate.value);
   } else {
     await ApiService.createPlate(plate.value);

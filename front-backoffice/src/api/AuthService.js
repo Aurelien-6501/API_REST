@@ -1,3 +1,4 @@
+import { useUserStore } from "../store/user";
 import AxiosInstance from "./AxiosInstance";
 
 class AuthService {
@@ -16,6 +17,11 @@ class AuthService {
       password,
     });
     return data.accessToken;
+  }
+
+  logout() {
+    const userStore = useUserStore();
+    userStore.logout();
   }
 }
 

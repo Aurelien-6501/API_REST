@@ -1,4 +1,5 @@
 import axios from "axios";
+import AuthService from "./AuthService";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -17,7 +18,7 @@ axiosInstance.interceptors.response.use(
   },
   async (error) => {
     if (error?.response?.status === 401) {
-      console.log("TOKEN EXPIRED");
+      AuthService.logout();
     }
 
     return error;

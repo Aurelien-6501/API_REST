@@ -2,10 +2,13 @@
   "name": "cours-api-rest",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon ./api-from-scratch/index.js",
-    "user:create": "node commands/create-user.js"
+    "dev": "nodemon server.js",
+    "create-user": "node ./commands/create-user.js",
+    "create-command": "node ./commands/create-command.js",
+    "create-admin": "node ./commands/create-admin.js"
+
   },
   "keywords": [],
   "author": "",

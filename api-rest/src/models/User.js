@@ -1,8 +1,12 @@
 const mongoose = require("mongoose");
 
-const Schema = new mongoose.Schema(
+const UserSchema = new mongoose.Schema(
   {
     email: {
+      type: String,
+      required: true,
+    },
+    name: {
       type: String,
       required: true,
     },
@@ -19,12 +23,14 @@ const Schema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-Schema.methods.toJSON = function () {
+
+UserSchema.methods.toJSON = function () {
   return {
     _id: this._id,
     email: this.email,
+    name: this.name,
     role: this.role,
   };
 };
 
-module.exports = mongoose.model("User", Schema);
+module.exports = mongoose.model("User", UserSchema);

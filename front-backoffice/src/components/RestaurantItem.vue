@@ -1,21 +1,30 @@
 <script setup>
 import { useRouter } from "vue-router";
+import ApiService from "../api/ApiService";
 
 const props = defineProps({
   restaurantAccount: Object,
+  onDeleted: Function,
 });
+
+async function deleteRestaurant() {
+  await ApiService.deleteRestaurant?.(props.restaurantAccount?._id);
+  props.onDeleted?.();
+}
 </script>
 
 <template>
   <div class="restaurant-item">
     <div class="restaurant-item-name">
-      {{ restaurantAccount?.name }}
+      {{ restaurantAccount?.user.name }}
     </div>
     <div class="restaurant-item-email">
-      {{ restaurantAccount?.email }}
+      {{ restaurantAccount?.user.email }}
     </div>
     <div class="restaurant-item-actions">
-      <button class="button button-error">Supprimer</button>
+      <button class="button button-error" @click="deleteRestaurant">
+        Supprimer
+      </button>
     </div>
   </div>
 </template>

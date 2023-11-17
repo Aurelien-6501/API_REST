@@ -1,29 +1,33 @@
 const { Router } = require("express");
-
 const authenticator = require("../services/authenticator");
-const User = require("../models/User");
+const user = require("../models/User");
+
+class AuthenticatorController {
+  static async login(req, res) {
+    try {
+      const { email, password } = req.body;
+      const accessToken = await authenticator.authenticate(email, password);
+      res.send( accessToken );
+    } catch (error) {
+      res.status(400).send({ error: "Invalid credentials" });
+    }
+  }
+
+  static async register(req, res) {
+    try {
+      const { email, password, name } = req.body;
+      const user = await authenticator.create({ email, password, name });
+      user.save();
+      const accessToken = await authenticator.authenticate(email, password);
+      res.send( accessToken );
+    } catch (error) {
+      res.status(400).send({ error: "Bad Request" });
+    }
+  }
+}
 
 /**
  * @param {Express.Application} app
  * @param {Router} router
  */
-module.exports = function (app, router) {
-  router.post("/login", async (req, res) => {
-    try {
-      res.send(
-        await authenticator.authenticate(req.body.email, req.body.password)
-      );
-    } catch (e) {
-      res.status(400).send(e);
-    }
-  });
-
-  router.post("/register", async (req, res) => {
-    try {
-      const user = await authenticator.create(req.body);
-      res.send(await authenticator.authenticate(user.email, req.body.password));
-    } catch (e) {
-      res.status(400).send("Bad Request");
-    }
-  });
-};
+module.exports = AuthenticatorController;

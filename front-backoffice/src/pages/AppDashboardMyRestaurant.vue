@@ -14,7 +14,18 @@ async function updateRestaurantUser() {
   await ApiService.updateRestaurantUser(restaurantAccount.value);
 }
 
-onMounted(() => {});
+async function loadRestaurant() {
+  restaurantAccount.value = await ApiService.getLoggedRestaurant();
+  restaurantAccount.value = {
+    name : restaurantAccount.value.user.name,
+    address : restaurantAccount.value.address,
+    postalCode : restaurantAccount.value.postalCode,
+    city : restaurantAccount.value.city
+  };
+}
+onMounted(() => {
+  loadRestaurant();
+});
 </script>
 
 <template>

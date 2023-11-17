@@ -2,150 +2,69 @@ import AxiosInstance from "./AxiosInstance";
 
 class ApiService {
   async getLoggedUser() {
-    const { data } = await AxiosInstance.get(`/users/@me`);
+    const { data } = await AxiosInstance.get(`/user/@me`);
+    return data;
+  }
+
+  async getLoggedRestaurant() {
+    const { data } = await AxiosInstance.get(`/restaurants/@me`);
     return data;
   }
 
   async getRestaurantAccounts() {
-    return [
-      {
-        _id: 1,
-        email: "restaurateur@gmail.com",
-        name: "Le restaurateur",
-      },
-      {
-        _id: 2,
-        email: "restaurateur2@gmail.com",
-        name: "Le restaurateur 2",
-      },
-    ];
+    const { data } = await AxiosInstance.get(`/restaurants`);
+    return data;
+
   }
 
   async createRestaurantUser(restaurantUser) {
-    /* const { data } = await AxiosInstance.post(`/users`, {
-      data: restaurantUser
-    }); */
-    return {
-      _id: 1,
-      email: "restaurateur@gmail.com",
-      name: "Le restaurateur",
-      address: "",
-      postalCode: "",
-      city: "",
-    };
+    const { data } = await AxiosInstance.post(`/restaurants`, restaurantUser);
+    return data;
   }
+
+  async deleteRestaurant(restaurantUserId) {
+    const { data } = await AxiosInstance.delete(`/restaurants/${restaurantUserId}`);
+    return data;
+  }
+
   async updateRestaurantUser(restaurantUser) {
-    /* const { data } = await AxiosInstance.patch(`/users/@me`, {
-      data: restaurantUser
-    }); */
-    return {
-      _id: 1,
-      ...restaurantUser,
-    };
+    const { data } = await AxiosInstance.patch(`/restaurants/@me`, restaurantUser);
+    return data;
+  }
+
+  async getRestaurant (restaurantId) {
+    const { data } = await AxiosInstance.get(`/restaurants/${restaurantId}`);
+    return data;
   }
 
   async getPlate(plateId) {
-    return {
-      _id: plateId,
-      name: "spagetthi",
-      image:
-        "https://assets.afcdn.com/recipe/20180326/78166_w1024h768c1cx2592cy1728.webp",
-      price: 10.99,
-    };
+    const { data } = await AxiosInstance.get(`/plates/${plateId}`);
+    return data;
   }
 
   async updatePlate(plateId, newPlate) {
-    return newPlate;
+    const { data } = await AxiosInstance.patch(`/plates/${plateId}`, newPlate);
+    return data;
   }
 
   async createPlate(newPlate) {
-    return newPlate;
+    const { data } = await AxiosInstance.post(`/plates`, newPlate);
+    return data;
   }
 
   async getRestaurantPlates() {
-    return [
-      {
-        _id: 3,
-        name: "spagetthi",
-        image:
-          "https://assets.afcdn.com/recipe/20180326/78166_w1024h768c1cx2592cy1728.webp",
-        price: 3.99,
-      },
-      {
-        _id: 4,
-        name: "spagetthi",
-        image:
-          "https://assets.afcdn.com/recipe/20180326/78166_w1024h768c1cx2592cy1728.webp",
-        price: 3.99,
-      },
-      {
-        _id: 5,
-        name: "spagetthi",
-        image:
-          "https://assets.afcdn.com/recipe/20180326/78166_w1024h768c1cx2592cy1728.webp",
-        price: 3.99,
-      },
-      {
-        _id: 6,
-        name: "spagetthi",
-        image:
-          "https://assets.afcdn.com/recipe/20180326/78166_w1024h768c1cx2592cy1728.webp",
-        price: 3.99,
-      },
-    ];
+    const { data } = await AxiosInstance.get(`/plates`);
+    return data;
   }
 
   async cancelOrder(orderId) {
-    //patch en changeant le statut
-    return {
-      createdAt: new Date(),
-      user: {
-        _id: 5,
-        email: "bob@gmail.com",
-      },
-      items: [
-        {
-          image:
-            "https://assets.afcdn.com/recipe/20180326/78166_w1024h768c1cx2592cy1728.webp",
-          name: "spagetthi",
-          price: 3.99,
-        },
-        {
-          image:
-            "https://assets.afcdn.com/recipe/20180326/78166_w1024h768c1cx2592cy1728.webp",
-          name: "spagetthi",
-          price: 2.99,
-        },
-      ],
-      status: "CANCELED",
-    };
+    const { data } = await AxiosInstance.patch(`/orders/${orderId}`);
+    return data;
   }
 
   async getRestaurantOrders() {
-    return [
-      {
-        createdAt: new Date(),
-        user: {
-          _id: 5,
-          email: "bob@gmail.com",
-        },
-        items: [
-          {
-            image:
-              "https://assets.afcdn.com/recipe/20180326/78166_w1024h768c1cx2592cy1728.webp",
-            name: "spagetthi",
-            price: 3.99,
-          },
-          {
-            image:
-              "https://assets.afcdn.com/recipe/20180326/78166_w1024h768c1cx2592cy1728.webp",
-            name: "spagetthi",
-            price: 2.99,
-          },
-        ],
-        status: "PROCESSED",
-      },
-    ];
+    const { data } = await AxiosInstance.get(`/orders`);
+    return data;
   }
 }
 

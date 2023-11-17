@@ -26,7 +26,7 @@ onMounted(() => {
     </header>
     <div class="orders">
       <OrderItem
-        @onOrderCanceled="onOrderCanceled"
+        @orderCanceled="onOrderCanceled"
         v-for="order in orders"
         :key="order._id"
         :order="order"

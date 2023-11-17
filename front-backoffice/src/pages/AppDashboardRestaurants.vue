@@ -27,6 +27,7 @@ onMounted(() => {
     </header>
     <div class="restaurants">
       <RestaurantItem
+        :on-deleted="loadRestaurantAccounts"
         v-for="restaurantAccount in restaurantsAccounts"
         :key="restaurantAccount._id"
         :restaurant-account="restaurantAccount"
