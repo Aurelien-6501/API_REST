@@ -1,7 +1,7 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
-const Hash = require("../utils/hash");
+const Hash = require("../utils/Hash");
 
 class Authenticator {
   async authenticate(email, password) {

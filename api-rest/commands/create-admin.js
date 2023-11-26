@@ -3,7 +3,7 @@ require('dotenv').config();
 require('../src/utils/mongoose');
 const prompts = require("prompts");
 const User = require("../src/models/User");
-const Hash = require("../src/utils/hash");
+const Hash = require("../src/utils/Hash");
 
 async function main() {
     const questions = [

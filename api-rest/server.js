@@ -1,6 +1,5 @@
 require('dotenv').config();
-const mongoose = require('./src/utils/mongoose'); // Ajout de cette ligne pour importer mongoose
-
+const mongoose = require('./src/utils/mongoose'); 
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'Erreur de connexion à MongoDB :'));
